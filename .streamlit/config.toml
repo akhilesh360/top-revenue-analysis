@@ -1,0 +1,36 @@
+[logger]
+level = "info"
+
+[runner]
+magicEnabled = true
+postScriptGC = true
+fastReruns = true
+
+[server]
+headless = false
+runOnSave = true
+port = 8501
+enableCORS = true
+enableXsrfProtection = true
+maxUploadSize = 200
+maxMessageSize = 200
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+
+# Primary accent color for interactive elements.
+primaryColor = "#2a5298"
+
+# Background color for the main content area.
+backgroundColor = "#ffffff"
+
+# Background color used for the sidebar and most interactive widgets.
+secondaryBackgroundColor = "#f0f2f6"
+
+# Color used for almost all text.
+textColor = "#262730"
+
+# Font family for all text in Streamlit apps.
+font = "sans serif"

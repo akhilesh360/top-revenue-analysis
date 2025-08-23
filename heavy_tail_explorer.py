@@ -73,21 +73,28 @@ def get_chat_response(question, context_data):
     Uses context from current dashboard state to provide intelligent answers
     """
     
-    # Extract current dashboard context
-    dist_type = context_data.get('dist_type', 'Unknown')
-    data = context_data.get('data', [])
-    business_scenario = context_data.get('business_scenario', 'Custom')
-    compare_segments = context_data.get('compare_segments', 'None')
+    # Input validation
+    if not question or not question.strip():
+        return "Please ask a question and I'll be happy to help!"
     
-    # Calculate key metrics if data available
-    if len(data) > 0:
-        mean_val = np.mean(data)
-        median_val = np.median(data)
-        skew_val = stats.skew(data)
-        std_val = np.std(data)
-        n_samples = len(data)
-    else:
-        mean_val = median_val = skew_val = std_val = n_samples = 0
+    # Extract current dashboard context with error handling
+    try:
+        dist_type = context_data.get('dist_type', 'Unknown')
+        data = context_data.get('data', [])
+        business_scenario = context_data.get('business_scenario', 'Custom')
+        compare_segments = context_data.get('compare_segments', 'None')
+        
+        # Calculate key metrics if data available
+        if len(data) > 0:
+            mean_val = np.mean(data)
+            median_val = np.median(data)
+            skew_val = stats.skew(data)
+            std_val = np.std(data)
+            n_samples = len(data)
+        else:
+            mean_val = median_val = skew_val = std_val = n_samples = 0
+    except Exception as e:
+        return f"⚠️ Error processing dashboard context. Please refresh and try again."
     
     # Smart response system based on question content
     question_lower = question.lower()
@@ -272,6 +279,8 @@ def generate_distribution_data(dist_type, params, n_samples, seed):
 @st.cache_data
 def bootstrap_statistics(data, n_bootstrap=1000, seed=42):
     """Calculate bootstrap confidence intervals for mean and median"""
+    if len(data) == 0:
+        return None
     rng = np.random.default_rng(seed)
     n = len(data)
     
@@ -296,6 +305,8 @@ def bootstrap_statistics(data, n_bootstrap=1000, seed=42):
 
 def calculate_sampling_distribution(dist_type, params, sample_size, n_replications, seed):
     """Calculate sampling distribution of the mean"""
+    if sample_size <= 0 or n_replications <= 0:
+        return np.array([])
     rng = np.random.default_rng(seed)
     sample_means = []
     
@@ -446,6 +457,14 @@ def main():
         st.sidebar.metric("Monthly Revenue", f"${monthly_revenue:,.0f}")
         st.sidebar.metric("Annual Impact", f"${annual_impact:,.0f}")
         st.sidebar.metric("Per-Session Value", f"${improvement_revenue/monthly_sessions*1000:.4f}")
+        
+        # Patrick's ROI Calculator
+        if annual_impact > 100000:
+            st.sidebar.success(f"🎯 High-Impact Opportunity: ${annual_impact:,.0f}/year")
+        elif annual_impact > 50000:
+            st.sidebar.info(f"📊 Medium-Impact Opportunity: ${annual_impact:,.0f}/year")
+        else:
+            st.sidebar.warning(f"⚡ Consider higher improvement targets for maximum ROI")
     
     # Segment comparison (Patrick's cohort request)
     st.sidebar.markdown("### Compare Cohorts")
