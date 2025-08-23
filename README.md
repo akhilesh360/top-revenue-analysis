@@ -88,3 +88,12 @@ streamlit run app.py
 - **Jupyter Notebooks** for interactive analysis
 - **Streamlit** for web applications
 - **Statistical Methods**: Robust regression, spline modeling
+
+## 🌐 Live Deployment
+
+### 📊 **Interactive Central Limit Theorem Demo**
+- **Live App**: [Coming Soon - Deploy to Streamlit Cloud]
+- **Repository**: [https://github.com/akhilesh360/top-revenue-analysis](https://github.com/akhilesh360/top-revenue-analysis)
+- **Local Testing**: `streamlit run streamlit/app.py`
+
+*After deployment, update this section with your live Streamlit Cloud URL*
