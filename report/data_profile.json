@@ -1,0 +1,44 @@
+{
+  "initial_rows": 4000,
+  "rows_after_drop": 4000,
+  "n_columns": 5,
+  "missing_counts": {
+    "revenue": 0,
+    "top": 0,
+    "browser": 0,
+    "platform": 0,
+    "site": 0
+  },
+  "winsorized_thresholds": {
+    "revenue": [
+      0.00471661298,
+      0.015000352319999997
+    ],
+    "top": [
+      0.9813556329400001,
+      32.6590823226
+    ]
+  },
+  "rows_winsorized": {
+    "revenue": 80,
+    "top": 80
+  },
+  "eda_stats": {
+    "revenue": {
+      "mean": 0.00971948082825,
+      "median": 0.009579913499999999,
+      "sd": 0.0025834399789294153
+    },
+    "top": {
+      "mean": 11.301960844134399,
+      "median": 9.7614733595,
+      "sd": 7.297124076707216
+    },
+    "corr_revenue_top": -0.564646616531364
+  },
+  "m1_slope_top": -0.00019990487043665503,
+  "m1_r2": 0.3188258015603176,
+  "m2_r2": 0.3644771664361659,
+  "m3_r2": 0.8537792391230412,
+  "controlled_effect_mu_to_mu_plus_1sd_percent": 0.06522219352492381
+}
