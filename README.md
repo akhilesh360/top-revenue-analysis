@@ -24,7 +24,6 @@ top-revenue-analysis/
 │   └── testdata.csv                    # Source dataset
 ├── analysis/
 │   ├── analysis.ipynb                  # Main Jupyter notebook analysis
-│   ├── make_report.py                  # Standalone analysis script
 │   └── generate_pdf_report.py          # PDF report generator
 ├── figs/                               # Generated visualizations
 ├── report/                             # Reports and results
@@ -50,9 +49,6 @@ pip install -r requirements.txt
 # Interactive notebook (recommended)
 cd analysis
 jupyter notebook analysis.ipynb
-
-# Or standalone script
-python make_report.py
 ```
 
 ### 3. Generate PDF Report
